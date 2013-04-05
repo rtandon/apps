@@ -1,14 +1,8 @@
 #!/usr/local/bin/python2.7
 
-"""
-Utils module containing helper methods used across application
-Tags: Utils
-Api: MIP DataPipeline
-"""
 import re
 from metadata import hive_formatter
 
-__author__ = 'sameer.thakur@clickable.com (Sameer Thakur)'
 from pytz import timezone
 import datetime
 import os
@@ -752,7 +746,6 @@ def sort_dict(d):
     return d
 
 
-#Region for ABI_KPI_DASHBOARD project specific methods
 def get_abi_kpi_report_file_path(network_type, report_date, time_stamp):
     year=time_stamp.strftime("%Y")
     month=time_stamp.strftime("%m")
