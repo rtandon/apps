@@ -1,4 +1,6 @@
 #python myip.py
+import commands
+import smtplib
 
 def sendemail(from_addr, to_addr_list, cc_addr_list,
               subject, message,
@@ -16,10 +18,10 @@ def sendemail(from_addr, to_addr_list, cc_addr_list,
 	server.quit()
 
 message_body = commands.getstatusoutput('curl ifconfig.me')
-sendemail(from_addr    = 'cloudtheta.solutions@gmail.com',
-          to_addr_list = ['cloudtheta.solutions@gmail.com'],
+sendemail(from_addr    = 'from_email_address@gmail.com',
+          to_addr_list = ['to_email_address@gmail.com'],
           cc_addr_list = [],
           subject      = 'my ip is ==>',
           message      = message_body[1],
-          login        = 'gmail_usr_id', #if gmail id is abc.xyz@gmail.com then it shoudl be abc.xyz
+          login        = 'gmail_usr_id_who_is_sending_content@gmail.com', #if gmail id is abc.xyz@gmail.com then it shoudl be abc.xyz
           password     = 'xxxxxxxxxx')
