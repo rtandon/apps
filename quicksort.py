@@ -12,20 +12,23 @@ def quickSortHelper(alist,first,last):
 
 def partition(alist,first,last):
    pivotvalue = alist[first]
-
+   print 'pivotvalue=' + str(pivotvalue)
    leftmark = first+1
    rightmark = last
-
+   print 'leftmark==' + str(leftmark)
+   print 'rightmark==' + str(rightmark)
    done = False
    while not done:
-
+       print str(leftmark) + '   ' + str(rightmark)
        while leftmark <= rightmark and \
                alist[leftmark] <= pivotvalue:
            leftmark = leftmark + 1
+           print 'new leftmark' + str(leftmark)
 
        while alist[rightmark] >= pivotvalue and \
                rightmark >= leftmark:
            rightmark = rightmark -1
+           print 'new rightmark' + str(rightmark)
 
        if rightmark < leftmark:
            done = True
@@ -33,15 +36,20 @@ def partition(alist,first,last):
            temp = alist[leftmark]
            alist[leftmark] = alist[rightmark]
            alist[rightmark] = temp
+           print 'swapping ' + str(leftmark) + '  ' + str(rightmark)
+           print alist
 
    temp = alist[first]
    alist[first] = alist[rightmark]
    alist[rightmark] = temp
 
-
+   print '<---------before returning rightmark---------->'
+   print str(leftmark) + '  ' + str(rightmark)
+   print alist
    return rightmark
 
 alist = [54,26,93,17,77,31,44,55,20]
+print alist
 quickSort(alist)
 print(alist)
 
