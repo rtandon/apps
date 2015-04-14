@@ -1,3 +1,9 @@
+/***
+ *This code allows us to read the large vector in chunk 
+ *and write the same in mahout understandable sequence file. 
+ *Hence we are able to scale the solution in terms of 
+ *reading data in chunks
+ */
 package mia.clustering.ch07;
 
 import java.io.File;
