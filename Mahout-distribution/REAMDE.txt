@@ -1,0 +1,16 @@
+
+Extract mahout-distribution-0.9-src.tar.gz
+
+https://mahout.apache.org/general/downloads.html
+http://www.apache.org/dyn/closer.cgi/mahout/
+
+
+#extract reuters data 
+mvn -e -q exec:java -Dexec.mainClass="org.apache.lucene.benchmark.utils.ExtractReuters" -Dexec.args="reuters/ reuters-extracted/"
+
+#create sequence file
+bin/mahout seqdirectory -c UTF-8 -i examples/reuters-extracted/ -o reuters-seqfiles
+
+#create vector
+bin/mahout seq2sparse -i reuters-seqfiles/ -o reuters-vectors -ow
+
