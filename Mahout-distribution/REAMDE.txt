@@ -14,3 +14,25 @@ bin/mahout seqdirectory -c UTF-8 -i examples/reuters-extracted/ -o reuters-seqfi
 #create vector
 bin/mahout seq2sparse -i reuters-seqfiles/ -o reuters-vectors -ow
 
+#create kmeans clusters using kmeans.KMeansDriver
+bin/mahout kmeans -i reuters-vectors/tfidf-vectors/ \
+-c reuters-initial-clusters \
+-o reuters-kmeans-clusters \
+-dm org.apache.mahout.common.distance.SquaredEuclideanDistanceMeasure \
+-cd 1.0 -k 20 -x 20 -cl
+
+#verify the cluster results
+bin/mahout clusterdump -dt sequencefile \
+-d reuters-vectors/dictionary.file-* \
+-s reuters-kmeans-clusters/clusters-19 -b 10 –n 10
+
+bin/mahout clusterdump -dt sequencefile -d reuters-vectors/dictionary.file-* -i reuters-kmeans-clusters/clusters-18-final -b 10 -n 10
+
+
+#Interpreting the output of mahout clusterdump
+    VL-x: is the identifier of the cluster
+    n=y: is the number of elements in the cluster
+    c=[z, ...]: is the centroid of the cluster, with the z's being the weights of the different dimensions
+    r=[z, ...]: is the radius of the cluster.
+
+
