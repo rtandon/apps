@@ -57,7 +57,7 @@ public class MyWordCount1 {
 	      System.exit(2);
 	    }
 	    Job job = new Job(conf, "word count");
-	    job.setJarByClass(WordCount.class);
+	    job.setJarByClass(MyWordCount1.class);
 	    job.setMapperClass(TokenizerMapper.class);
 	    job.setCombinerClass(IntSumReducer.class);
 	    job.setReducerClass(IntSumReducer.class);
