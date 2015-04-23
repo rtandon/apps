@@ -14,10 +14,8 @@ import java.util.regex.Pattern;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
-import org.apache.hadoop.mapred.JobConf;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Reducer;
@@ -26,6 +24,7 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.SequenceFileOutputFormat;
+import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import org.apache.hadoop.util.GenericOptionsParser;
 import org.apache.hadoop.util.ToolRunner;
 import org.apache.mahout.common.AbstractJob;
@@ -78,7 +77,7 @@ public class WikipediaToItemPrefsMapper_Reducer1 extends AbstractJob{
 			for (VarLongWritable itemPref : itemPrefs) {
 				userVector.set((int) itemPref.get(), 1.0f);
 			}
-			context.write(userID, new VectorWritable(userVector));
+			context.write(userID, (new VectorWritable(userVector)) );
 		}
 	}
 
@@ -95,49 +94,26 @@ public class WikipediaToItemPrefsMapper_Reducer1 extends AbstractJob{
 
 	    job_preferenceValues.setInputFormatClass(TextInputFormat.class);
 	    job_preferenceValues.setOutputFormatClass(SequenceFileOutputFormat.class);
+//	    job_preferenceValues.setOutputFormatClass(TextOutputFormat.class);
+	    
 
 	    FileInputFormat.setInputPaths(job_preferenceValues, new Path(arg0[0]));
 	    SequenceFileOutputFormat.setOutputPath(job_preferenceValues, new Path(arg0[1]));
+	    FileOutputFormat.setOutputPath(job_preferenceValues, new Path(arg0[1]));
 
 	    job_preferenceValues.setMapOutputKeyClass(VarLongWritable.class);
 	    job_preferenceValues.setMapOutputValueClass(VarLongWritable.class);
 
 	    job_preferenceValues.setOutputKeyClass(VarLongWritable.class);
 	    job_preferenceValues.setOutputValueClass(VectorWritable.class);
+//	    job_preferenceValues.setOutputValueClass(TextOutputFormat.class);
+	    
 
 	    job_preferenceValues.setMapperClass(WikipediaToItemPrefsMapper.class);
 	    job_preferenceValues.setReducerClass(WikipediaToUserVectorReducer.class);
 	    
-	    
-//	    job.setJarByClass(WikipediaToItemPrefsMapper_Reducer.class);
-//	    job.setMapperClass(WikipediaToItemPrefsMapper.class);
-//	    
-//	    //You can just set the number of reduce tasks to 0 by 
-//	    //using JobConf.setNumReduceTasks(0). This will make the 
-//	    //results of the mapper go straight into HDFS.
-////	    job.setNumReduceTasks(0);
-//
-//	    job.setCombinerClass(WikipediaToUserVectorReducer.class);
-//	    job.setReducerClass(WikipediaToUserVectorReducer.class);
-//	    
-//	    job.setMapOutputKeyClass(VarLongWritable.class);
-//	    job.setMapOutputValueClass(VarLongWritable.class);
-//	    
-////	    job.setOutputFormatClass(SequenceFileOutputFormat.class);
-//	    job.setOutputFormatClass(SequenceFileOutputFormat.class);
-//	    job.setOutputKeyClass(VarLongWritable.class);
-//	    job.setOutputValueClass(VectorWritable.class);
-//	    
-//	    FileInputFormat.addInputPath(job, new Path(arg0[0]));
-//	    FileOutputFormat.setOutputPath(job, new Path(arg0[1]));
-	    
-	    
 	    job_preferenceValues.waitForCompletion(true);
 	    
-//	    job.waitForCompletion(true);
-	    
-//	    JobClient.runJob(conf);
-
 		return 0;
 	}
 
