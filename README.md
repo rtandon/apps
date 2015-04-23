@@ -4,6 +4,7 @@ apps
 #How to sync the files in different machine
 	rsync -rpvz .  hduser@hadoop:~/Downloads/apps/
 	rsync -rpvz --exclude '*.class' --exclude '*.jar'  .  hduser@hadoop:~/Downloads/apps/
+	rsync -rpvz --exclude '*.class' --exclude '*.jar' --exclude '.git*' .  hduser@hadoop:~/Downloads/apps/
 
 
 my apps , python etc code
