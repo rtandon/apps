@@ -26,7 +26,6 @@ bin/mahout clusterdump -dt sequencefile \
 -d reuters-vectors/dictionary.file-* \
 -s reuters-kmeans-clusters/clusters-19 -b 10 –n 10
 
-bin/mahout clusterdump -dt sequencefile -d reuters-vectors/dictionary.file-* -i reuters-kmeans-clusters/clusters-18-final -b 10 -n 10
 
 
 #Interpreting the output of mahout clusterdump
@@ -35,4 +34,9 @@ bin/mahout clusterdump -dt sequencefile -d reuters-vectors/dictionary.file-* -i 
     c=[z, ...]: is the centroid of the cluster, with the z's being the weights of the different dimensions
     r=[z, ...]: is the radius of the cluster.
 
+  #simple output
+  bin/mahout clusterdump -dt sequencefile -d reuters-vectors/dictionary.file-* -i reuters-kmeans-clusters/clusters-18-final -b 10 -n 10
+  
+  #Below output the documents top terms in document_cluster_Relation.txt
+  bin/mahout clusterdump -dt sequencefile -d reuters-vectors/dictionary.file-* -i reuters-kmeans-clusters/clusters-20-final -b 20 -n 3 -p reuters-kmeans-clusters/clusteredPoints -o document_cluster_Relation.txt
 
