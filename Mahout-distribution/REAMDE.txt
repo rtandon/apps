@@ -5,7 +5,7 @@ https://mahout.apache.org/general/downloads.html
 http://www.apache.org/dyn/closer.cgi/mahout/
 
 
-#extract reuters data 
+#extract reuters data . go to mahout-distribution/examples and run the below command.
 mvn -e -q exec:java -Dexec.mainClass="org.apache.lucene.benchmark.utils.ExtractReuters" -Dexec.args="reuters/ reuters-extracted/"
 
 #create sequence file
